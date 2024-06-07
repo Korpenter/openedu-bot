@@ -4,21 +4,39 @@ theme: /
 
     state: Start
         q!: $regex</start>
-        a: Начнём.
+        a: хахаха
 
-    state: Hello
+    state: /hello
         intent!: /привет
-        a: Привет привет
+        a: Привет
 
     state: Bye
         intent!: /пока
-        a: Пока пока
+        a: Пока
 
-    state: KnowledgeBase
-        intentGroup!: /KnowledgeBase
-        a: Нашёл ответ в базе знаний!
-        script: $faq.pushReplies();
-
-    state: NoMatch
+    state: /NoMatch
         event!: noMatch
-        a: Я не понял. Вы сказали: {{$request.query}}
+        a: Я вас не понял.
+
+    state: Match
+        event!: match
+        a: {{$context.intent.answer}}
+
+        
+theme: /WeatherForecast
+    
+    state: /weather
+        q!: * ~прогноз * ~погода *
+        q!: * ~погода *
+        q!: * ~прогноз *
+        q!: *будет [осадк*/~дождь/~снег/~град]*
+        a: Погода будет хорошей. Такой вот прогноз погоды.
+    
+theme: /Banking
+    
+    state: /currency
+        q!: * ~прогноз * ~валюта *
+        q!: * ~курс * ~валюта *
+        q!:*~валюта *
+        q!: * ~курс *
+        a: Я в курсе всех дел банка, вот курсы.
